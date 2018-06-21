@@ -3,5 +3,6 @@ repository = ~/.dotfiles
 ignore = [
     '.git',
     '.gitignore',
-    '*.sw[a-p]'
+    '*.sw[a-p]',
+    'README.md'
     ]

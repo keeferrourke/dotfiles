@@ -132,6 +132,7 @@ au BufWrite *.js        :Autoformat
 au FileType java        set cc=120 tw=120
 au BufRead  *.x68       set noexpandtab filetype=asm68k
 au BufRead  *.tex       set cc=80 tw=80 spell
+au FileType yaml        set cc=80 tabstop=2 softtabstop=2 shiftwidth=2
 au BufRead  *.md        set cc=72 tw=72 filetype=markdown
 au BufRead  README      set cc=72 tw=72 filetype=markdown
 au BufRead  TODO        set cc=72 tw=72 filetype=markdown
