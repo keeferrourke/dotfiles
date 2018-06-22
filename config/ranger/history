@@ -1,0 +1,9 @@
+delete 
+
+rename 
+rename ICON.txt
+mkdir Abstracts
+delete
+mkdir Important\ Documents
+rename Important Documents
+mkdir Certificates

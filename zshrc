@@ -9,7 +9,7 @@ PROMPT='[%n@%m]%# '
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 #ZSH_THEME="agnoster_b"
-ZSH_THEME="bureau"
+ZSH_THEME="bureau-light"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -91,6 +91,7 @@ alias xclip="xclip -selection clipboard"            # cut to clipboard by defaul
 alias battery="upower -i $(upower -e | grep 'BAT')" # show battery stats
 alias mango="godoc"                                 # google missed a great opportunity
 alias accio="dnf install"                           # make some magic
+alias feh="feh -."                                  # fit image previews to window
 
 # Env variables
 export GOPATH=$HOME/go
@@ -99,6 +100,7 @@ export NODE_PATH=/usr/lib/node_modules
 export PATH=$PATH:$GOPATH/bin:$RUSTPATH/bin
 export MOZ_USE_XINPUT2=1
 export QT_QPA_PLATFORMTHEME=qt5ct
+export SWAY_CURSOR_THEME=capitaine-cursors
 
 # fuck
 eval $(thefuck --alias)
