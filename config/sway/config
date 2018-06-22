@@ -4,6 +4,8 @@
 #
 # Read `man 5 sway` for a complete reference.
 
+exec source ~/.zshrc
+
 ## Variables
 #
 # Logo key. Use Mod1 for Alt.
@@ -194,14 +196,14 @@ bindsym $mod+r mode "resize"
 # Power and lock management:
 # --------------------------
 mode "system" {
-    bindsym l exec swaylock
-    bindsym s exec swaylock && sleep 1 && systemctl suspend
+    bindsym l exec swaysollock
+    bindsym s exec swaysollock -f && systemctl suspend
 
     # return to default mode
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
-bindsym $mod+Shift+Delete "system"
+bindsym $alt+Control+Delete mode "system"
 
 # Appearance:
 # --------------------------
