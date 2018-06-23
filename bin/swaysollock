@@ -27,9 +27,11 @@ swaygrab $LOCKBG
 convert $LOCKBG -blur 0x8 -channel RGBA $LOCKBG
 swaylock -i $LOCKBG $@ \
 	--bshlcolor $orange \
-	--insidecolor $base02 --insidevercolor $cyan --insidewrongcolor $red \
+	--insidecolor $base02 --insidevercolor $green --insidewrongcolor $red \
 	--keyhlcolor $blue --line-uses-ring \
-       	--ringcolor $base00 --ringvercolor $cyan --ringwrongcolor $red \
-	--separatorcolor $transparent --textcolor $base00 \
+       	--ringcolor $base00 --ringvercolor $green --ringwrongcolor $red \
+	--separatorcolor $transparent --textcolor $base3 \
 	--indicator-radius $radius
 rm $LOCKBG
+
+swaymsg mode default
