@@ -11,9 +11,12 @@ Plug 'Chiel92/vim-autoformat'           " code auto-formatter
 Plug 'ctrlpvim/ctrlp.vim'               " quick file look-up and switching
 Plug 'fatih/vim-go'                     " golang integration
 Plug 'lifepillar/vim-solarized8'        " solarized colourschemes
+Plug 'mattn/emmet-vim'                  " zencoding (html shorthand expander)
+Plug 'mhinz/vim-signify'                " vcs gutter
 Plug 'moll/vim-bbye'                    " buffer deletion
 Plug 'plasticboy/vim-markdown'          " better markdown support
 Plug 'scrooloose/nerdtree'              " file explorer
+Plug 'tpope/vim-surround'               " motions to change bracketed text
 Plug 'vim-airline/vim-airline'          " airline toolbar
 Plug 'vim-airline/vim-airline-themes'   " airline themes
 Plug 'w0rp/ale'                         " asynchronous lint engine
@@ -35,6 +38,8 @@ let g:airline_skip_empty_sections = 1
 let g:autoformat_autoindent = 0
 let g:autoformat_retab = 0
 let g:autoformat_remove_trailing_spaces = 1
+let g:formatdef_custom_tidy_html = '"tidy -q --show-errors 0 --show-warnings 0 --force-output --indent auto --indent-spaces ".shiftwidth()." --tidy-mark no -wrap ".&textwidth'
+let g:formatters_html = ['custom_tidy_html']
 
 " golang
 let g:go_fmt_command = "goimports"
@@ -53,6 +58,12 @@ let g:ctrlp_custom_ignore = {
 \   'file': '\v\.(a|so|o|dll|tar|gz)$',
 \}
 
+" emmet
+let g:user_emmet_install_global = 0
+autocmd FileType html,css EmmetInstall
+
+" signify
+let g:signify_vcs_list = [ 'git' ] ", 'hg', 'bzr' ]
 
 " key mappings and mouse behavior
 " -------------------------------
@@ -62,6 +73,10 @@ map <C-d> :Bdelete<CR>
 map <C-a> :Autoformat<CR>
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
+map <C-h> :vertical resize -1<CR>
+map <C-l> :vertical resize +1<CR>
+map <C-j> :resize +1<CR>
+map <C-k> :resize -1<CR>
 
 
 " colourscheme
@@ -122,6 +137,7 @@ end
 " file type specific settings
 " ---------------------------
 au FileType c           set cc=78 tw=78
+au FileType cpp         set cc=78 tw=78
 au BufWrite *.c         :Autoformat
 au BufWrite *.h         :Autoformat
 au BufRead  Makefile    set tabstop=8 softtabstop=8 shiftwidth=8 noexpandtab
@@ -129,10 +145,13 @@ au FileType rust        set cc=80 tw=80
 au FileType go			set cc=80 tw=80 noexpandtab
 au FileType javascript  set cc=80 tw=80
 au BufWrite *.js        :Autoformat
+au FileType html        set tabstop=2 softtabstop=2 shiftwidth=2
+au FileType xml         set tabstop=2 softtabstop=2 shiftwidth=2
 au FileType java        set cc=120 tw=120
 au BufRead  *.x68       set noexpandtab filetype=asm68k
 au BufRead  *.tex       set cc=80 tw=80 spell
 au FileType yaml        set cc=80 tabstop=2 softtabstop=2 shiftwidth=2
+au FileType css         set cc=80 tabstop=2 softtabstop=2 shiftwidth=2
 au BufRead  *.md        set cc=72 tw=72 filetype=markdown
 au BufRead  README      set cc=72 tw=72 filetype=markdown
 au BufRead  TODO        set cc=72 tw=72 filetype=markdown
