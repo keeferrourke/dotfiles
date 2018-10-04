@@ -1,12 +1,17 @@
 " vim-plug plugins
 " ----------------
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+let g:vim_home='~/.vim'
+if has('nvim')
+    let g:vim_home='~/.config/nvim'
+endif
+
+if empty(glob(g:vim_home.'/autoload/plug.vim'))
+  silent exec '!curl -fLo '.g:vim_home.'/autoload/plug.vim --create-dirs '
+    \ .'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-call plug#begin('~/.vim/plugged')
+call plug#begin(g:vim_home.'/plugged')
 Plug 'Chiel92/vim-autoformat'           " code auto-formatter
 Plug 'ctrlpvim/ctrlp.vim'               " quick file look-up and switching
 Plug 'fatih/vim-go'                     " golang integration
@@ -38,11 +43,13 @@ let g:airline_skip_empty_sections = 1
 let g:autoformat_autoindent = 0
 let g:autoformat_retab = 0
 let g:autoformat_remove_trailing_spaces = 1
-let g:formatdef_custom_tidy_html = '"tidy -q --show-errors 0 --show-warnings 0 --force-output --indent auto --indent-spaces ".shiftwidth()." --tidy-mark no -wrap ".&textwidth'
+let g:formatdef_custom_tidy_html = '"tidy -q --show-errors 0 --show-warnings 0'
+  \ .'--force-output --indent auto --indent-spaces ".shiftwidth()."'
+  \ .'--tidy-mark no -wrap ".&textwidth'
 let g:formatters_html = ['custom_tidy_html']
 
 " golang
-let g:go_fmt_command = "goimports"
+let g:go_fmt_command = 'goimports'
 
 " markdown
 let g:vim_markdown_folding_disabled = 1
@@ -54,8 +61,8 @@ let g:vim_markdown_new_list_item_indent = 2
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_custom_ignore = {
-\   'dir': 'node_modules\|DS_STORE\|git',
-\   'file': '\v\.(a|so|o|dll|tar|gz)$',
+  \ 'dir': 'node_modules\|DS_STORE\|git',
+  \ 'file': '\v\.(a|so|o|dll|tar|gz)$',
 \}
 
 " emmet
@@ -82,8 +89,8 @@ map <C-k> :resize -1<CR>
 " colourscheme
 " ------------
 if has("termguicolors")
-    set termguicolors
-    colorscheme solarized8_light_flat
+  set termguicolors
+  colorscheme solarized8_light_flat
 endif
 
 " syntax highlighting
@@ -131,11 +138,12 @@ set foldlevel=20
 " faster grep
 set grepprg=grep\ -nH\ $*
 if executable('ag') " when we have ag, use it.
-    set grepprg=ag\ --nogroup\ --nocolor\ -S\ --ignore\ node_modules\ --ignore\ .git\ --ignore\ tags
+  set grepprg=ag\ --nogroup\ --nocolor\ -S\ --ignore\ node_modules\ --ignore\ .git\ --ignore\ tags
 end
 
 " file type specific settings
 " ---------------------------
+au FileType vim         set cc=80 tw=80 tabstop=2 softtabstop=2 shiftwidth=2
 au FileType c           set cc=78 tw=78
 au FileType cpp         set cc=78 tw=78
 au BufWrite *.c         :Autoformat
